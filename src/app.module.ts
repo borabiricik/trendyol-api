@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './modules/user/user.module';
+import { MerchantModule } from './modules/merchant/merchant.module';
 
 @Module({
   imports: [
@@ -16,10 +17,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: process.env.DB_PASSWORD,
       port: 5432,
       synchronize: true,
-      dropSchema: true,
       autoLoadEntities: true,
+      // dropSchema: true,
     }),
     UserModule,
+    MerchantModule,
   ],
   controllers: [AppController],
   providers: [AppService],
