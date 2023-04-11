@@ -1,17 +1,14 @@
 import {
-  BadGatewayException,
   CallHandler,
   ExecutionContext,
+  Inject,
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { Observable, catchError, map, throwError } from 'rxjs';
-import { responseMessage } from '../decorators/response.decorator';
+import { Observable, map } from 'rxjs';
 
 interface Response<T> {
-  message: string;
-  status: boolean;
   data: T;
 }
 
@@ -19,18 +16,10 @@ interface Response<T> {
 export class TransformInterceptor<T>
   implements NestInterceptor<T, Response<T>>
 {
-  constructor(private reflector: Reflector) {}
   intercept(
     context: ExecutionContext,
-    next: CallHandler,
-  ): Observable<Response<T>> {
-    const message =
-      this.reflector.get<string>(responseMessage, context.getHandler()) ?? null;
-    return next
-      .handle()
-      .pipe(map((data) => ({ status: true, message, data })))
-      .pipe(
-        catchError(map(() => ({ data: null, status: false, message: null }))),
-      );
+    next: CallHandler<T>,
+  ): Observable<Response<T>> | Promise<Observable<Response<T>>> {
+    return next.handle().pipe(map((data) => ({ data })));
   }
 }
