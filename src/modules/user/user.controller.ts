@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './entities/User.entity';
 import { CreateUserDto } from './dtos/User.dto';
-import { ResponseMessage } from 'src/common/decorators/response.decorator';
+import { ResponseMessage } from 'src/modules/common/decorators/response.decorator';
 
 @Controller('user')
 export class UserController {
