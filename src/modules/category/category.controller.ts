@@ -17,6 +17,11 @@ export class CategoryController {
     return this.categoryService.getAll();
   }
 
+  @Get(':id')
+  async getDetailsById(@Param() params): Promise<Category> {
+    return await this.categoryService.getDetailsById(params.id);
+  }
+
   @Delete(':id')
   async delete(@Param() params) {
     const deleted = await this.categoryService.delete(params.id);

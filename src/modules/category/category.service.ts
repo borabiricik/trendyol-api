@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Category } from './entities/category.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { NotFoundException } from '../common/exceptions/not-found.exception';
 
 @Injectable()
 export class CategoryService {
@@ -16,6 +17,17 @@ export class CategoryService {
 
   async getAll(): Promise<Category[]> {
     return await this.categoryRepository.find();
+  }
+
+  async getDetailsById(id: string): Promise<Category> {
+    try {
+      return await this.categoryRepository.findOneOrFail({
+        where: { id },
+        relations: { products: true },
+      });
+    } catch (error) {
+      throw new NotFoundException('Category');
+    }
   }
 
   async delete(id: string) {

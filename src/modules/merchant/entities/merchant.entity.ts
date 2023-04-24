@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Product } from 'src/modules/product/entities/product.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Merchant {
@@ -16,4 +17,7 @@ export class Merchant {
 
   @Column({ type: 'float', default: 0.0 })
   score: number;
+
+  @OneToMany(() => Product, (product) => product.merchant)
+  products: Product[];
 }

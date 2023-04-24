@@ -12,7 +12,7 @@ export class MerchantService {
   ) {}
 
   getAll(): Promise<Merchant[]> {
-    return this.merchantRepository.find();
+    return this.merchantRepository.find({ relations: { products: true } });
   }
 
   getById(id: string): Promise<Merchant> {
