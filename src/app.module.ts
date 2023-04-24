@@ -21,6 +21,7 @@ import { ProductModule } from './modules/product/product.module';
       synchronize: true,
       autoLoadEntities: true,
       // dropSchema: true,
+      // dropSchema: true,
     }),
     UserModule,
     MerchantModule,

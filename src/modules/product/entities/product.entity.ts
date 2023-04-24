@@ -1,9 +1,11 @@
 import { Category } from 'src/modules/category/entities/category.entity';
+import { Merchant } from 'src/modules/merchant/entities/merchant.entity';
 import {
   Column,
   Entity,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -21,9 +23,10 @@ export class Product {
   @Column('decimal', { nullable: false })
   price: number;
 
-  @ManyToMany(() => Category, (category) => category.products, {
-    cascade: true,
-  })
+  @ManyToMany(() => Category, (category) => category.products)
   @JoinTable()
   categories: Category[];
+
+  @ManyToOne(() => Merchant, (merchant) => merchant.products, { eager: true })
+  merchant: Merchant;
 }
