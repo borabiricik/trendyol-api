@@ -8,12 +8,12 @@ export class Merchant {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   desc: string;
 
-  @Column()
+  @Column({ nullable: true })
   picture: string;
 
-  @Column()
+  @Column({ type: 'float', default: 0.0 })
   score: number;
 }
