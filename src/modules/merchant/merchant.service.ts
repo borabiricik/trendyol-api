@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Repository, UpdateResult } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Merchant } from './entities/merchant.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateMerchantDto, UpdateMerchantDto } from './dtos/merchant.dto';
