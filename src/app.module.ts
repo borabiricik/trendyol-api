@@ -7,10 +7,11 @@ import { UserModule } from './modules/user/user.module';
 import { MerchantModule } from './modules/merchant/merchant.module';
 import { CategoryModule } from './modules/category/category.module';
 import { ProductModule } from './modules/product/product.module';
+import indexConfig from './modules/common/config/index.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({load:[indexConfig]}),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_IP,
