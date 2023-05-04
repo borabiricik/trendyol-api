@@ -16,7 +16,7 @@ export class MerchantService {
   }
 
   getById(id: string): Promise<Merchant> {
-    return this.merchantRepository.findOneBy({ id });
+    return this.merchantRepository.findOne({ where:{id},relations:{products:true} });
   }
 
   async create(merchant: CreateMerchantDto): Promise<Merchant> {
