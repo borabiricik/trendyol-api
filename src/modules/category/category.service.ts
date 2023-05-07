@@ -16,7 +16,9 @@ export class CategoryService {
   }
 
   async getAll(): Promise<Category[]> {
-    return await this.categoryRepository.find();
+    return await this.categoryRepository.find({
+      relations: { sub_categories: true },
+    });
   }
 
   async getDetailsById(id: string): Promise<Category> {

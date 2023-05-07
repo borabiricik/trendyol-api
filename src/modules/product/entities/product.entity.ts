@@ -23,6 +23,9 @@ export class Product {
   @Column('decimal', { nullable: false })
   price: number;
 
+  @Column({ nullable: false })
+  image: string;
+
   @ManyToMany(() => Category, (category) => category.products)
   @JoinTable()
   categories: Category[];

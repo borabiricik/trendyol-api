@@ -1,11 +1,5 @@
-import {
-  ArrayNotEmpty,
-  IsNotEmpty,
-  MaxLength,
-  MinLength,
-} from 'class-validator';
+import { ArrayNotEmpty, IsNotEmpty } from 'class-validator';
 import { Category } from 'src/modules/category/entities/category.entity';
-import { Merchant } from 'src/modules/merchant/entities/merchant.entity';
 
 export class CreateProductDto {
   @IsNotEmpty()
