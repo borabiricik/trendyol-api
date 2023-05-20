@@ -23,7 +23,7 @@ export class Product {
   @Column('decimal', { nullable: false })
   price: number;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   image: string;
 
   @ManyToMany(() => Category, (category) => category.products)
