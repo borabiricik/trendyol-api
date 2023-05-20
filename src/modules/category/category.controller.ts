@@ -1,15 +1,32 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  FileValidator,
+  Get,
+  Param,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+  UsePipes,
+} from '@nestjs/common';
 import { Category } from './entities/category.entity';
 import { CategoryService } from './category.service';
 import { NotFoundException } from '../common/exceptions/not-found.exception';
+import { CreateCategoryDto } from './dtos/category.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('category')
 export class CategoryController {
   constructor(private categoryService: CategoryService) {}
 
   @Post()
-  async create(@Body() category): Promise<Category> {
-    return await this.categoryService.create(category);
+  @UseInterceptors(FileInterceptor('image'))
+  async create(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() category: CreateCategoryDto,
+  ): Promise<Category> {
+    return await this.categoryService.create(category, file);
   }
 
   @Get()

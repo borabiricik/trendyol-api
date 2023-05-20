@@ -9,7 +9,9 @@ import { CategoryModule } from './modules/category/category.module';
 import { ProductModule } from './modules/product/product.module';
 import { SubCategoryModule } from './modules/sub-category/sub-category.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
 import indexConfig from './modules/common/config/index.config';
+import { CloudinaryService } from './modules/cloudinary/cloudinary.service';
 
 @Module({
   imports: [
@@ -32,8 +34,9 @@ import indexConfig from './modules/common/config/index.config';
     ProductModule,
     SubCategoryModule,
     AuthModule,
+    CloudinaryModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, CloudinaryService],
 })
 export class AppModule {}

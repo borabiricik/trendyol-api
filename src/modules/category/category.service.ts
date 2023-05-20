@@ -3,16 +3,26 @@ import { Repository } from 'typeorm';
 import { Category } from './entities/category.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NotFoundException } from '../common/exceptions/not-found.exception';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
+import { CreateCategoryDto } from './dtos/category.dto';
 
 @Injectable()
 export class CategoryService {
   constructor(
     @InjectRepository(Category)
     private categoryRepository: Repository<Category>,
+    private cdn: CloudinaryService,
   ) {}
 
-  async create(category: Category): Promise<Category> {
-    return await this.categoryRepository.save(category);
+  async create(
+    category: CreateCategoryDto,
+    file: Express.Multer.File,
+  ): Promise<Category> {
+    const uploadedFile = await this.cdn.uploadImage(file);
+    return await this.categoryRepository.save({
+      ...category,
+      image: uploadedFile.url,
+    });
   }
 
   async getAll(): Promise<Category[]> {
