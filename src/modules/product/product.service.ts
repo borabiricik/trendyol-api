@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, Repository } from 'typeorm';
+import { ILike, In, Like, Repository } from 'typeorm';
 import { CreateProductDto } from './dtos/product.dto';
 import { Product } from './entities/product.entity';
 import { Category } from '../category/entities/category.entity';
@@ -28,9 +28,12 @@ export class ProductService {
     return await this.productRepository.save(createdProduct);
   }
 
-  async getAll(): Promise<Product[]> {
+  async getAll(filter: string): Promise<Product[]> {
     return await this.productRepository.find({
       relations: { categories: true, merchant: true },
+      where: {
+        name: (filter && ILike(`%${filter}%`)) || undefined,
+      },
     });
   }
 }

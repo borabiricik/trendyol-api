@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CreateProductDto } from './dtos/product.dto';
 import { ProductService } from './product.service';
 import { Product } from './entities/product.entity';
@@ -12,7 +12,7 @@ export class ProductController {
   }
 
   @Get()
-  async getAll(): Promise<Product[]> {
-    return await this.productService.getAll();
+  async getAll(@Query() query?): Promise<Product[]> {
+    return await this.productService.getAll(query.name);
   }
 }

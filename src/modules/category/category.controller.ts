@@ -2,13 +2,11 @@ import {
   Body,
   Controller,
   Delete,
-  FileValidator,
   Get,
   Param,
   Post,
   UploadedFile,
   UseInterceptors,
-  UsePipes,
 } from '@nestjs/common';
 import { Category } from './entities/category.entity';
 import { CategoryService } from './category.service';
