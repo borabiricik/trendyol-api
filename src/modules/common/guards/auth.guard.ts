@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Observable } from 'rxjs';
 import { User } from 'src/modules/user/entities/User.entity';
 import { Repository } from 'typeorm';
+import * as jwt from 'jsonwebtoken';
 
 const validateUser = async (
   request: any,
@@ -16,7 +17,11 @@ const validateUser = async (
     const foundUser = await userRepository.findOne({
       where: { token: request.headers.authorization.split(' ')[1] },
     });
-    return !!foundUser;
+    const decodedToken = jwt.decode(
+      request.headers.authorization.split(' ')[1],
+      { json: true },
+    );
+    return !!foundUser && decodedToken.email === foundUser.email;
   } catch (error) {
     throw new UnauthorizedException();
   }
