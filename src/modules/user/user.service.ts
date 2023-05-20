@@ -16,6 +16,14 @@ export class UserService {
   }
 
   async findAll(): Promise<User[]> {
-    return await this.userRepository.find();
+    return await this.userRepository.find({
+      select: {
+        password: false,
+        token: false,
+        email: true,
+        full_name: true,
+        id: true,
+      },
+    });
   }
 }

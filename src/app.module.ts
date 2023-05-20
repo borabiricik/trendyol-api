@@ -8,6 +8,7 @@ import { MerchantModule } from './modules/merchant/merchant.module';
 import { CategoryModule } from './modules/category/category.module';
 import { ProductModule } from './modules/product/product.module';
 import { SubCategoryModule } from './modules/sub-category/sub-category.module';
+import { AuthModule } from './modules/auth/auth.module';
 import indexConfig from './modules/common/config/index.config';
 
 @Module({
@@ -30,6 +31,7 @@ import indexConfig from './modules/common/config/index.config';
     CategoryModule,
     ProductModule,
     SubCategoryModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
