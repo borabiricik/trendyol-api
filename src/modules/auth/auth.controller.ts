@@ -2,7 +2,9 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
+  Get,
   Post,
+  Req,
   UseInterceptors,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
@@ -21,5 +23,12 @@ export class AuthController {
   @UseInterceptors(ClassSerializerInterceptor)
   async login(@Body() payload: LoginDto) {
     return await this.authService.login(payload);
+  }
+
+  @Get('/logout')
+  async logout(@Req() req) {
+    return await this.authService.logout(
+      req.headers.authorization.split(' ')[1],
+    );
   }
 }

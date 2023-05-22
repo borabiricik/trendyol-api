@@ -24,6 +24,7 @@ export class AuthService {
         payload.password,
         foundUser.password,
       );
+      console.log(payload.password, foundUser.password);
       if (!isPasswordCorrect) {
         throw new UnauthorizedException('Password is incorrect');
       } else {
@@ -39,6 +40,7 @@ export class AuthService {
         email: payload.email,
       },
     });
+
     if (foundUser) {
       throw new AlreadyExistsException('User');
     } else {
@@ -51,6 +53,17 @@ export class AuthService {
       delete createdUser.password;
       delete createdUser.token;
       return createdUser;
+    }
+  }
+
+  async logout(token: string) {
+    const foundUser = await this.userRepository.findOne({ where: { token } });
+    if (foundUser) {
+      foundUser.token = null;
+      this.userRepository.save(foundUser);
+      return 'Logout succesfull';
+    } else {
+      throw new NotFoundException('User');
     }
   }
 }

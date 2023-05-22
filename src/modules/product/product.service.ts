@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ILike, In, Like, Repository } from 'typeorm';
+import { ILike, In, Repository } from 'typeorm';
 import { CreateProductDto } from './dtos/product.dto';
 import { Product } from './entities/product.entity';
 import { Category } from '../category/entities/category.entity';
