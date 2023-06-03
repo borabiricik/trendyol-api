@@ -1,3 +1,4 @@
+import { Basket } from 'src/modules/basket/entities/basket.entity';
 import { Category } from 'src/modules/category/entities/category.entity';
 import { Favorite } from 'src/modules/favorites/entities/Favorites.entity';
 import { Merchant } from 'src/modules/merchant/entities/merchant.entity';
@@ -37,4 +38,7 @@ export class Product {
 
   @OneToMany(() => Favorite, (favorite) => favorite.product)
   favorite: Favorite;
+
+  @OneToMany(() => Basket, (basket) => basket.product)
+  basket: Basket;
 }

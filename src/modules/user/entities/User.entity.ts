@@ -1,5 +1,6 @@
 import { Exclude } from 'class-transformer';
 import { IsJWT } from 'class-validator';
+import { Basket } from 'src/modules/basket/entities/basket.entity';
 import { Favorite } from 'src/modules/favorites/entities/Favorites.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -24,4 +25,7 @@ export class User {
 
   @OneToMany(() => Favorite, (favorite) => favorite.user, { nullable: true })
   favorites: Favorite[];
+
+  @OneToMany(() => Basket, (basket) => basket.user)
+  user: User;
 }

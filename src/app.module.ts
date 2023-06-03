@@ -13,6 +13,7 @@ import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
 import indexConfig from './modules/common/config/index.config';
 import { CloudinaryService } from './modules/cloudinary/cloudinary.service';
 import { FavoritesModule } from './modules/favorites/favorites.module';
+import { BasketModule } from './modules/basket/basket.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { FavoritesModule } from './modules/favorites/favorites.module';
     AuthModule,
     CloudinaryModule,
     FavoritesModule,
+    BasketModule,
   ],
   controllers: [AppController],
   providers: [AppService, CloudinaryService],
