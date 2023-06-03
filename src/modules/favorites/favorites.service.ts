@@ -31,4 +31,11 @@ export class FavoritesService {
     });
     return await this.favoriteRepository.save({ product, user });
   }
+
+  async removeFromFavorites(body: AddToFavoritesDto, id: string) {
+    const product = await this.productRepository.findOne({
+      where: { id: body.product_id },
+    });
+    return await this.favoriteRepository.delete({ product, id });
+  }
 }

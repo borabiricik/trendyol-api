@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Headers,
+  Param,
   Post,
   UseGuards,
 } from '@nestjs/common';
@@ -29,5 +31,10 @@ export class FavoritesController {
       payload,
       (decode(headers.authorization?.split(' ')[1]) as JwtPayload).email,
     );
+  }
+
+  @Delete(':id')
+  async addFromFavorites(@Body() payload: AddToFavoritesDto, @Param('id') id) {
+    return await this.favoritesService.removeFromFavorites(payload, id);
   }
 }

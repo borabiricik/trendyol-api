@@ -6,10 +6,9 @@ import {
   Headers,
   Param,
   Post,
-  Query,
 } from '@nestjs/common';
-import { BasketService } from './basket.service';
 import { JwtPayload, decode } from 'jsonwebtoken';
+import { BasketService } from './basket.service';
 
 @Controller('basket')
 export class BasketController {

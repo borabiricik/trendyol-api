@@ -14,6 +14,7 @@ import indexConfig from './modules/common/config/index.config';
 import { CloudinaryService } from './modules/cloudinary/cloudinary.service';
 import { FavoritesModule } from './modules/favorites/favorites.module';
 import { BasketModule } from './modules/basket/basket.module';
+import { CheckoutModule } from './modules/checkout/checkout.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { BasketModule } from './modules/basket/basket.module';
     CloudinaryModule,
     FavoritesModule,
     BasketModule,
+    CheckoutModule,
   ],
   controllers: [AppController],
   providers: [AppService, CloudinaryService],
