@@ -1,6 +1,7 @@
 import { Exclude } from 'class-transformer';
 import { IsJWT } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Favorite } from 'src/modules/favorites/entities/Favorites.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -20,4 +21,7 @@ export class User {
   @Column({ nullable: true })
   @IsJWT()
   token: string;
+
+  @OneToMany(() => Favorite, (favorite) => favorite.user, { nullable: true })
+  favorites: Favorite[];
 }

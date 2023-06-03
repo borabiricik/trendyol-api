@@ -1,4 +1,5 @@
 import { Category } from 'src/modules/category/entities/category.entity';
+import { Favorite } from 'src/modules/favorites/entities/Favorites.entity';
 import { Merchant } from 'src/modules/merchant/entities/merchant.entity';
 import {
   Column,
@@ -6,6 +7,7 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -32,4 +34,7 @@ export class Product {
 
   @ManyToOne(() => Merchant, (merchant) => merchant.products, { eager: true })
   merchant: Merchant;
+
+  @OneToMany(() => Favorite, (favorite) => favorite.product)
+  favorite: Favorite;
 }
