@@ -32,10 +32,10 @@ export class FavoritesService {
     return await this.favoriteRepository.save({ product, user });
   }
 
-  async removeFromFavorites(body: AddToFavoritesDto, id: string) {
+  async removeFromFavorites(id: string) {
     const product = await this.productRepository.findOne({
-      where: { id: body.product_id },
+      where: { id },
     });
-    return await this.favoriteRepository.delete({ product, id });
+    return await this.favoriteRepository.delete({ product });
   }
 }

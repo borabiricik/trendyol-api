@@ -34,7 +34,7 @@ export class FavoritesController {
   }
 
   @Delete(':id')
-  async addFromFavorites(@Body() payload: AddToFavoritesDto, @Param('id') id) {
-    return await this.favoritesService.removeFromFavorites(payload, id);
+  async addFromFavorites(@Param('id') id) {
+    return await this.favoritesService.removeFromFavorites(id);
   }
 }
